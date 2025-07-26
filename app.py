@@ -14,10 +14,10 @@ import traceback # For detailed error logging
 import os # Added for environment variables
 
 app = Flask(__name__)
-# CORS Configuration: Allowing all origins for testing purposes.
-# IMPORTANT: For production, replace "*" with specific origins (e.g., "http://your-frontend-domain.com").
-# For Render, you might want to set this to your Render app's URL or specific frontend domains.
-CORS(app, resources={r"/api/*": {"origins": "*"}}) 
+# CORS Configuration: Allowing specific origins for production.
+# IMPORTANT: Replace the origin below with your actual frontend URL.
+# If your frontend is at https://mk-signal-x-bot.onrender.com, use that.
+CORS(app, resources={r"/api/*": {"origins": ["https://mk-signal-x-bot.onrender.com", "http://localhost:8000"]}}) # Added localhost for local testing
 
 # Global variables to store signals and their last generation time
 # The 'signals' dictionary stores current active signal data for each pair.
