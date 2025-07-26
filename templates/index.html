@@ -752,11 +752,12 @@
 
     <script>
         // API URL for fetching signals (requires authentication)
-        const API_URL = 'http://127.0.0.1:5000/api/signal'; 
-        const LOGIN_API_URL = 'http://127.0.0.1:5000/api/login'; 
-        const CHECK_AUTH_API_URL = 'http://127.0.0.1:5000/api/check_auth'; 
-        // New API URL for simple backend status check (does NOT require authentication)
-        const BACKEND_STATUS_API_URL = 'http://127.0.0.1:5000/api/status'; 
+        // Corrected API URLs to point to your Render.com deployed backend
+        const BASE_URL = 'https://mk-signal-x-bot-1.onrender.com'; // Your Render.com app URL
+        const API_URL = `${BASE_URL}/api/signal`; 
+        const LOGIN_API_URL = `${BASE_URL}/api/login`; 
+        const CHECK_AUTH_API_URL = `${BASE_URL}/api/check_auth`; 
+        const BACKEND_STATUS_API_URL = `${BASE_URL}/api/status`; 
 
         const signalsGrid = document.getElementById('signal-cards-container');
         const countdownTimerDisplay = document.getElementById('countdown-timer');
@@ -1604,6 +1605,8 @@
             onboardingContainer.style.display = 'flex';
             loginContainer.style.display = 'none'; // Ensure login is hidden
             mainBotInterface.style.display = 'none'; // Ensure main interface is hidden
+            globalBackgroundImage.style.display = 'block'; // Ensure image background is visible
+            globalImageOverlay.style.display = 'block'; // Ensure image overlay is visible
             mainBotBackground.style.display = 'none'; // Ensure video background is hidden initially
             
             // Start ambient music (image doesn't need .play())
@@ -1711,6 +1714,8 @@
             vaultUnlockOverlay.classList.remove('active');
             // Transition to dashboard
             loginContainer.style.display = 'none';
+            globalBackgroundImage.style.display = 'none'; // Hide image background
+            globalImageOverlay.style.display = 'none'; // Hide image overlay
             mainBotInterface.style.display = 'flex';
             mainBotBackground.style.display = 'block'; // Show video background for main interface
             backgroundVideo.play(); // Play the video for the main interface
@@ -1783,6 +1788,8 @@
                         console.log('User already authenticated. Redirecting to dashboard.');
                         onboardingContainer.style.display = 'none';
                         loginContainer.style.display = 'none';
+                        globalBackgroundImage.style.display = 'none'; // Hide image background
+                        globalImageOverlay.style.display = 'none'; // Hide image overlay
                         mainBotInterface.style.display = 'flex';
                         mainBotBackground.style.display = 'block'; // Show video background for main interface
                         backgroundVideo.play(); // Play the video for the main interface
@@ -1815,6 +1822,8 @@
             localStorage.removeItem('mk_signal_token');
             window.location.reload(); // Reload page to show onboarding/login screen
         }
+
+        logoutBtn.addEventListener('click', logoutUser); // Attach event listener to the logout button
 
         // Ensure Tone.js audio context starts on first user interaction
         document.body.addEventListener('click', async () => {
