@@ -31,7 +31,7 @@ signals_lock = threading.Lock()
 # For local testing, a fallback list can be provided.
 API_KEYS = []
 for i in range(1, 6): # Assuming you might have up to 5 API keys (TWELVEDATA_API_KEY_1, TWELVEDATA_API_KEY_2, ...)
-    key = os.environ.get(f"TWELVEDATA_API_KEY_{i}")a
+    key = os.environ.get(f"TWELVEDATA_API_KEY_{i}") # Corrected: Removed extra 'a' at the end
     if key:
         API_KEYS.append(key)
 
